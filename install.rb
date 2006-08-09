@@ -16,6 +16,7 @@ def fckeditor_copy(source, dest)
   end
 end
 
+directory = File.join(RAILS_ROOT, '/vendor/plugins/fckeditor/')
 source = File.join(directory,'/public/javascripts/fckeditor/')
 dest = File.join(RAILS_ROOT, '/public/javascripts/fckeditor/')
 FileUtils.mkdir(dest) unless File.exist?(dest)
