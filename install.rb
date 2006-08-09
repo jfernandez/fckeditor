@@ -1,6 +1,6 @@
 # Install hook code here
 
-FCKEDITOR_VERSION = '0.0.1'
+FCKEDITOR_VERSION = '0.1.2'
 
 def fckeditor_copy(source, dest)
   Dir.foreach(source) do |entry|

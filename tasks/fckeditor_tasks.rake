@@ -3,7 +3,7 @@
 #   # Task goes here
 # end
 
-FCKEDITOR_VERSION = '0.0.1'
+FCKEDITOR_VERSION = '0.1.2'
 
 namespace :fckeditor do
   desc 'Install the FCKEditor components'
