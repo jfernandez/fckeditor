@@ -1,5 +1,7 @@
 # Install hook code here
 
+FCKEDITOR_VERSION = '0.0.1'
+
 def fckeditor_copy(source, dest)
   Dir.foreach(source) do |entry|
     next if entry =~ /^\./
@@ -19,6 +21,8 @@ end
 directory = File.join(RAILS_ROOT, '/vendor/plugins/fckeditor/')
 source = File.join(directory,'/public/javascripts/fckeditor/')
 dest = File.join(RAILS_ROOT, '/public/javascripts/fckeditor/')
+puts "** Installing FCKEditor Plugin version #{FCKEDITOR_VERSION} to #{dest}..." 
+ 
 FileUtils.mkdir(dest) unless File.exist?(dest)
 
 fckeditor_copy(source, dest)
@@ -31,3 +35,5 @@ fckeditor_copy(source, dest)
 
 uploads = File.join(RAILS_ROOT, '/public/uploads')
 FileUtils.mkdir(uploads) unless File.exist?(uploads)
+
+puts "** Successfully installed FCKEditor Plugin version #{FCKEDITOR_VERSION}"
