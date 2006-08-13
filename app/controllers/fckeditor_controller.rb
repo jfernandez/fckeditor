@@ -3,11 +3,32 @@ class FckeditorController < ApplicationController
   UPLOADED = "/uploads"
   UPLOADED_ROOT = RAILS_ROOT + "/public" + UPLOADED
   MIME_TYPES = [
+    "image/jpg",
     "image/jpeg",
+    "image/pjpeg",
     "image/gif",
     "image/png",
     "application/x-shockwave-flash"
   ]
+  
+  RXML = <<-EOL
+  xml.instruct!
+    #=> <?xml version="1.0" encoding="utf-8" ?>
+  xml.Connector("command" => params[:Command], "resourceType" => 'File') do
+    xml.CurrentFolder("url" => @url, "path" => params[:CurrentFolder])
+    xml.Folders do
+      @folders.each do |folder|
+        xml.Folder("name" => folder)
+      end
+    end if !@folders.nil?
+    xml.Files do
+      @files.keys.sort.each do |f|
+        xml.File("name" => f, "size" => @files[f])
+      end
+    end if !@files.nil?
+    xml.Error("number" => @errorNumber) if !@errorNumber.nil?
+  end
+  EOL
   
   # figure out who needs to handle this request
   def command   
@@ -18,6 +39,8 @@ class FckeditorController < ApplicationController
 	  elsif params[:Command] == 'FileUpload'
  	    upload_file
  	  end
+ 	  
+ 	  render :inline => RXML, :type => :rxml
  	end 
  	
   def get_folders_and_files(include_files = true)
@@ -39,7 +62,7 @@ class FckeditorController < ApplicationController
       path = @url + params[:NewFolderName]
       if !(File.stat(@url).writable?)
         @errorNumber = 103
-      elsif params[:CurrentFolder] !~ /[\w\d\s]+/
+      elsif params[:NewFolderName] !~ /[\w\d\s]+/
         @errorNumber = 102
       elsif FileTest.exists?(path)
         @errorNumber = 101
@@ -53,27 +76,25 @@ class FckeditorController < ApplicationController
   end
   
   def upload_file
+    new_file = params[:NewFile]
     begin
-      ftype = params[:NewFile].content_type.strip
+      ftype = new_file.content_type.strip
       if ! MIME_TYPES.include?(ftype)
         @errorNumber = 202
+        puts "#{ftype} is invalid MIME type"
         raise "#{ftype} is invalid MIME type"
       else
         dir = UPLOADED_ROOT + (params[:CurrentFolder] ? params[:CurrentFolder] : "/")
-        path = dir + params[:NewFile].original_filename
+        path = dir + new_file.original_filename
         File.open(path,"wb",0664) do |fp|
-          FileUtils.copy_stream(params[:NewFile], fp)
+          FileUtils.copy_stream(new_file, fp)
         end
         @errorNumber = 0
       end
     rescue => e
       @errorNumber = 110 if @errorNumber.nil?
     end
-    render :text => <<-EOL
-    <script type="text/javascript">
-      window.parent.frames['frmUpload'].OnUploadCompleted(#{@errorNumber});
-    </script>
-    EOL
+    render :inline => 'page << "window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber}, \'#{new_file}\');"', :type => :rjs
   end
 
   def upload

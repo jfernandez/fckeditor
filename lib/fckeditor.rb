@@ -1,5 +1,11 @@
 # Fckeditor
 module Fckeditor
+  PLUGIN_NAME = 'fckeditor'
+  PLUGIN_PATH = "#{RAILS_ROOT}/vendor/plugins/#{PLUGIN_NAME}"
+  PLUGIN_PUBLIC_PATH = "#{PLUGIN_PATH}/public"
+  PLUGIN_CONTROLLER_PATH = "#{PLUGIN_PATH}/app/controllers"  
+  PLUGIN_VIEWS_PATH = "#{PLUGIN_PATH}/app/views"  
+  
   module Helper
     def fckeditor_textarea(object, field, options = {})
       value = eval("@#{object}.#{field}")
@@ -45,5 +51,31 @@ module Fckeditor
       form_field = "#{object}[#{field}]"
       "var oEditor = FCKeditorAPI.GetInstance('"+textarea_id+"'); $('"+form_field+"').value = oEditor.GetXHTML();"
     end
+  end
+end
+
+module ActionView::Helpers::AssetTagHelper
+  alias_method :rails_javascript_include_tag, :javascript_include_tag
+  
+  # Adds a new option to Rails' built-in <tt>javascript_include_tag</tt>
+  # helper - <tt>:unobtrusive</tt>. Works in the same way as <tt>:defaults</tt> - specifying 
+  # <tt>:unobtrusive</tt> will make sure the necessary javascript
+  # libraries and behaviours file +script+ tags are loaded. Will happily
+  # work along side <tt>:defaults</tt>.
+  #
+  #  <%= javascript_include_tag :defaults, :unobtrusive %>
+  #
+  # This replaces the old +unobtrusive_javascript_files+ helper.
+  def javascript_include_tag(*sources)
+    main_sources, application_source = [], []
+    if sources.include?(:fckeditor)
+      sources.delete(:fckeditor)
+      sources.push('fckeditor/fckeditor')
+    end
+    unless sources.empty?
+      main_sources = rails_javascript_include_tag(*sources).split("\n") 
+      application_source = main_sources.pop if main_sources.last.include?('application.js')
+    end
+    [main_sources.join("\n"), application_source].join("\n")
   end
 end
