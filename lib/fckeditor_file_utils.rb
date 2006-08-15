@@ -1,8 +1,6 @@
 require 'fileutils'
 
 module FckeditorFileUtils
-  FCKEDITOR_VERSION = '0.1.3'
-  
   def FckeditorFileUtils.recursive_copy(source, dest)
     Dir.foreach(source) do |entry|
       next if entry =~ /^\./

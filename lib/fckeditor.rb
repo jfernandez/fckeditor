@@ -6,6 +6,16 @@ module Fckeditor
   PLUGIN_CONTROLLER_PATH = "#{PLUGIN_PATH}/app/controllers"  
   PLUGIN_VIEWS_PATH = "#{PLUGIN_PATH}/app/views"  
   
+  module Version
+    MAJOR = 0
+    MINOR = 1
+    RELEASE = 4
+  end
+
+  def self.version
+ 		"#{Version::MAJOR}.#{Version::MINOR}.#{Version::RELEASE}"
+ 	end
+  
   module Helper
     def fckeditor_textarea(object, field, options = {})
       value = eval("@#{object}.#{field}")
@@ -51,6 +61,29 @@ module Fckeditor
       form_field = "#{object}[#{field}]"
       "var oEditor = FCKeditorAPI.GetInstance('"+textarea_id+"'); $('"+form_field+"').value = oEditor.GetXHTML();"
     end
+  end
+end
+
+module ActionController
+ 	module Routing
+ 	
+ 	  class ControllerComponent
+ 	    class << self
+ 	    protected
+        def safe_load_paths #:nodoc:
+          if defined?(RAILS_ROOT)
+            $LOAD_PATH.select do |base|
+              base = File.expand_path(base)
+              extended_root = File.expand_path(RAILS_ROOT)
+              # Exclude all paths that are not nested within app, lib, or components, or the fckeditor plugin
+              base.match(/\A#{Regexp.escape(extended_root)}\/*(app|lib|components|vendor\/plugins\/fckeditor\/app)\/[a-z]/) || base =~ %r{rails-[\d.]+/builtin}
+            end
+          else
+            $LOAD_PATH
+          end
+        end
+	    end
+ 	  end
   end
 end
 
