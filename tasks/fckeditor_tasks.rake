@@ -21,7 +21,7 @@ namespace :fckeditor do
     end
       
     puts "** Installing FCKEditor Plugin version #{Fckeditor.version} to #{dest}..."      
-    FckeditorFileUtils.recursive_copy(source, dest)      
+    FckeditorFileUtils.recursive_copy(:source => source, :dest => dest)      
             
     # create upload directory
     uploads = File.join(RAILS_ROOT, '/public/uploads')

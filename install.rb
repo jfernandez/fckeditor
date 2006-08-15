@@ -10,7 +10,7 @@ puts "** Installing FCKEditor Plugin version #{Fckeditor.version} to #{dest}..."
  
 FileUtils.mkdir(dest) unless File.exist?(dest)
 
-FckeditorFileUtils.recursive_copy(source, dest)
+FckeditorFileUtils.recursive_copy(:source => source, :dest => dest)
 
 uploads = File.join(RAILS_ROOT, '/public/uploads')
 FileUtils.mkdir(uploads) unless File.exist?(uploads)
