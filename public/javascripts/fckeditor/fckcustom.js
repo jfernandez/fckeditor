@@ -5,3 +5,4 @@ FCKConfig.LinkUploadURL = '/fckeditor/upload';
 FCKConfig.ImageUploadURL = '/fckeditor/upload?Type=Image';
 FCKConfig.FlashUploadURL = '/fckeditor/upload?Type=Flash';
 FCKConfig.SkinPath = FCKConfig.BasePath + 'skins/silver/';
+FCKConfig.AllowQueryStringDebug = false;

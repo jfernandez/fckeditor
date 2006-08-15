@@ -126,8 +126,8 @@ FCKeditor.prototype._GetConfigHtml = function()
 
 FCKeditor.prototype._GetIFrameHtml = function()
 {
-	var sFile = (/fcksource=true/i).test( window.top.location.search ) ? 'fckeditor.original.html' : 'fckeditor.html' ;
-
+	var sFile = 'fckeditor.html' ;
+	
 	var sLink = this.BasePath + 'editor/' + sFile + '?InstanceName=' + this.InstanceName ;
 	if (this.ToolbarSet) sLink += '&Toolbar=' + this.ToolbarSet ;
 
