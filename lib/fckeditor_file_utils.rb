@@ -54,7 +54,7 @@ module FckeditorFileUtils
   def FckeditorFileUtils.destroy_and_install
     # remove the existing install (if any) and install a new one
     if File.exist?(FCKEDITOR_INSTALL_DIRECTORY)    
-      File.rm_r(FCKEDITOR_INSTALL_DIRECTORY)
+      FileUtils.rm_r(FCKEDITOR_INSTALL_DIRECTORY)
     end    
     # now install fresh
     install(true)       
