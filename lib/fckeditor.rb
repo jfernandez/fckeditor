@@ -30,7 +30,6 @@ module Fckeditor
       height = options[:height].nil? ? '100%' : options[:height]
       
       toolbarSet = options[:toolbarSet].nil? ? 'Default' : options[:toolbarSet]
-      value = options[:value].nil? ? 'Default' : options[:value]
       
       if options[:ajax]
         inputs = "<input type='hidden' id='#{form_field}' name='#{form_field}'>\n"+    
