@@ -1,5 +1,5 @@
 require 'fileutils'
-class FckeditorController < ApplicationController
+class FckeditorController < ActionController::Base
   UPLOADED = "/uploads"
   UPLOADED_ROOT = RAILS_ROOT + "/public" + UPLOADED
   MIME_TYPES = [

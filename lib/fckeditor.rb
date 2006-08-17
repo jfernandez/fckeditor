@@ -9,7 +9,7 @@ module Fckeditor
   module Version
     MAJOR = 0
     MINOR = 1
-    RELEASE = 4
+    RELEASE = 5
   end
 
   def self.version
@@ -29,6 +29,9 @@ module Fckeditor
       width = options[:width].nil? ? '100%' : options[:width]
       height = options[:height].nil? ? '100%' : options[:height]
       
+      toolbarSet = options[:toolbarSet].nil? ? 'Default' : options[:toolbarSet]
+      value = options[:value].nil? ? 'Default' : options[:value]
+      
       if options[:ajax]
         inputs = "<input type='hidden' id='#{form_field}' name='#{form_field}'>\n"+    
                  "<textarea id='#{name}' #{cols} #{rows} name='#{name}'>#{value}</textarea>\n"
@@ -40,10 +43,8 @@ module Fckeditor
       inputs + 
       javascript_tag( "FCKeditorAPI = null;\n" +
                       "__FCKeditorNS = null;\n" +
-                      "var oFCKeditor = new FCKeditor('#{name}');\n"+
-                      "oFCKeditor.Width = '#{width}'\n"+
-                      "oFCKeditor.Height = '#{height}'\n"+
-                      "oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckeditor/fckcustom.js';\n"+
+                      "var oFCKeditor = new FCKeditor('#{name}', '#{width}', '#{height}', '#{toolbarSet}', '#{value}');\n"+
+                      "oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js';\n"+
                       "oFCKeditor.ReplaceTextarea();\n")   
     end
 
@@ -61,29 +62,6 @@ module Fckeditor
       form_field = "#{object}[#{field}]"
       "var oEditor = FCKeditorAPI.GetInstance('"+textarea_id+"'); $('"+form_field+"').value = oEditor.GetXHTML();"
     end
-  end
-end
-
-module ActionController
- 	module Routing
- 	
- 	  class ControllerComponent
- 	    class << self
- 	    protected
-        def safe_load_paths #:nodoc:
-          if defined?(RAILS_ROOT)
-            $LOAD_PATH.select do |base|
-              base = File.expand_path(base)
-              extended_root = File.expand_path(RAILS_ROOT)
-              # Exclude all paths that are not nested within app, lib, or components, or the fckeditor plugin
-              base.match(/\A#{Regexp.escape(extended_root)}\/*(app|lib|components|vendor\/plugins\/fckeditor\/app)\/[a-z]/) || base =~ %r{rails-[\d.]+/builtin}
-            end
-          else
-            $LOAD_PATH
-          end
-        end
-	    end
- 	  end
   end
 end
 

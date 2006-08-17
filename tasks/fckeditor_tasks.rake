@@ -11,22 +11,11 @@ namespace :fckeditor do
     directory = File.join(RAILS_ROOT, '/vendor/plugins/fckeditor/')
     require "#{directory}lib/fckeditor"
     require "#{directory}lib/fckeditor_file_utils"
-    
-    source = File.join(directory,'/public/javascripts/fckeditor/')
-    dest = File.join(RAILS_ROOT, '/public/javascripts/fckeditor')
-    
-    unless File.exists?(dest)
-      puts "Creating directory #{dest}..."
-      FileUtils.mkdir(dest)
-    end
       
-    puts "** Installing FCKEditor Plugin version #{Fckeditor.version} to #{dest}..."      
-    FckeditorFileUtils.recursive_copy(:source => source, :dest => dest)      
-            
-    # create upload directory
-    uploads = File.join(RAILS_ROOT, '/public/uploads')
-    FileUtils.mkdir(uploads) unless File.exist?(uploads)
-      
+    puts "** Installing FCKEditor Plugin version #{Fckeditor.version}..."           
+
+    FckeditorFileUtils.destroy_and_install 
+         
     puts "** Successfully installed FCKEditor Plugin version #{Fckeditor.version}"
   end
 
