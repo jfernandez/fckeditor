@@ -1,4 +1,72 @@
-Fckeditor
-=========
+Fckeditor: Version 0.1.5, 
+=========================
 
-Description goes here
+Scott Rutherford
+scott@caronsoftware.com
+
+Credits to:
+
+"Integrate FCKEditor with your Ruby on Rails application" - http://www.joshuamcharles.com/xhtml/fckrails.php By Joshua M Charles
+"Implementation details for FCKEditor integration with Ruby on Rails" - http://public.ok2life.com/welcome/index/49.html 
+"FCKEditor On Rails" - http://www.underpantsgnome.com/projects/fckeditor-on-rails/
+
+-------
+
+This plugin installs the FCKeditor editor into your rails app, along with some helpers to use in your views.
+
+Install
+-------
+
+If you got this using:
+
+ruby script/plugin install svn://rubyforge.org//var/svn/fckeditorp/trunk/fckeditor
+
+Then the install should of copied all the appropriate files to their homes. If you download a tar then you can either do
+
+rake fckeditor:install 
+
+from the root of your app, or the file will be installed the first time you startup after untaring the plugin.
+
+Files
+-----
+
+Basically the whole of the FCKeditor suite is copied to: public/javascripts/fckeditor
+
+There is a separate config file copied to: public/javascripts/fckcustom.js, that you can use to customize the install. This file is never overriden by upgrades or reinstalls
+
+Usage
+-----
+
+Basically include this in the page you wish to use the editor in
+
+<%= javascript_include_tag :fckeditor %>
+
+Then instead of the normal textarea helper from Rails use this one
+
+<%= fckeditor_textarea("object", "field", :toolbarKit => 'Simple, :width => '400', :height => '200' %>
+
+Thats it unless you are using AJAX
+
+AJAX
+----
+
+To use a remote form you need to do something like this
+
+<%= form_remote_tag :url => @options.merge(:controller => @scaffold_controller),
+                    :before => fckeditor_before_js('note', 'text') %>
+
+    <%= fckeditor_textarea( "note", "text", :height => '200', :ajax => true ) %> 
+
+<%= end_form_tag %>
+
+If you forget to put in the :before it won't work
+
+Issues / TODO's
+------
+
+1) There is a problem with uploading Flash files
+2) There are no progress indicators for the AJAX requests from the resource manager
+2) ISpell is not yet implemented
+3) No real docs....
+
+
