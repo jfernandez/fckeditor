@@ -20,8 +20,7 @@ module Fckeditor
     def fckeditor_textarea(object, field, options = {})
       value = eval("@#{object}.#{field}")
       value = value.nil? ? "" : value
-      name = fckeditor_element_id(object, field)
-      form_field = "#{object}[#{field}]"
+      id = fckeditor_element_id(object, field)
       
       cols = options[:cols].nil? ? '' : "cols='"+options[:cols]+"'"
       rows = options[:rows].nil? ? '' : "rows='"+options[:rows]+"'"
@@ -32,33 +31,33 @@ module Fckeditor
       toolbarSet = options[:toolbarSet].nil? ? 'Default' : options[:toolbarSet]
       
       if options[:ajax]
-        inputs = "<input type='hidden' id='#{form_field}' name='#{form_field}'>\n"+    
-                 "<textarea id='#{name}' #{cols} #{rows} name='#{name}'>#{value}</textarea>\n"
+        inputs = "<input type='hidden' id='#{object}_#{field}' name='#{object}[#{field}]'>\n"+    
+                 "<textarea id='#{id}' #{cols} #{rows} name='#{id}'>#{value}</textarea>\n"
       else 
-        name = "#{object}[#{field}]"
-        inputs = "<textarea id='#{name}' #{cols} #{rows} name='#{name}'>#{value}</textarea>\n"
+        inputs = "<textarea id='#{id}' #{cols} #{rows} name='#{object}[#{field}]'>#{value}</textarea>\n"
       end
 
       inputs + 
       javascript_tag( "FCKeditorAPI = null;\n" +
                       "__FCKeditorNS = null;\n" +
-                      "var oFCKeditor = new FCKeditor('#{name}', '#{width}', '#{height}', '#{toolbarSet}', '#{value}');\n"+
+                      "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}', '#{value}');\n"+
                       "oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js';\n"+
                       "oFCKeditor.ReplaceTextarea();\n")   
     end
 
     def fckeditor_element_id(object, field)
       id = eval("@#{object}.id")
-      "#{object}-#{id}-#{field}-editor"    
+      "#{object}_#{id}_#{field}_editor"    
     end
 
     def fckeditor_div_id(object, field)
-      'div-'+fckeditor_element_id(object, field)
+      id = eval("@#{object}.id")  
+      "div-#{object}-#{id}-#{field}-editor" 
     end
 
     def fckeditor_before_js(object, field)
       textarea_id = fckeditor_element_id(object, field)
-      form_field = "#{object}[#{field}]"
+      form_field = "#{object}_#{field}"
       "var oEditor = FCKeditorAPI.GetInstance('"+textarea_id+"'); $('"+form_field+"').value = oEditor.GetXHTML();"
     end
   end
