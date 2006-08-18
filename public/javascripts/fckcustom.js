@@ -1,4 +1,4 @@
-// new for rails
+// DON'T CHANGE THESE
 FCKConfig.LinkBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Connector=/fckeditor/command';
 FCKConfig.ImageBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Type=Image&Connector=/fckeditor/command';
 FCKConfig.FlashBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Type=Flash&Connector=/fckeditor/command';
@@ -6,9 +6,10 @@ FCKConfig.FlashBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/br
 FCKConfig.LinkUploadURL = '/fckeditor/upload';
 FCKConfig.ImageUploadURL = '/fckeditor/upload?Type=Image';
 FCKConfig.FlashUploadURL = '/fckeditor/upload?Type=Flash';
-
-FCKConfig.SkinPath = FCKConfig.BasePath + 'skins/silver/';
 FCKConfig.AllowQueryStringDebug = false;
+
+// ONLY CHANGE BELOW HERE
+FCKConfig.SkinPath = FCKConfig.BasePath + 'skins/silver/';
 
 FCKConfig.ToolbarSets["Simple"] = [
 	['Source','-','-','Templates'],
