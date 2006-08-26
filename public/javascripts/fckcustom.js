@@ -7,6 +7,7 @@ FCKConfig.LinkUploadURL = '/fckeditor/upload';
 FCKConfig.ImageUploadURL = '/fckeditor/upload?Type=Image';
 FCKConfig.FlashUploadURL = '/fckeditor/upload?Type=Flash';
 FCKConfig.AllowQueryStringDebug = false;
+FCKConfig.SpellChecker = 'SpellerPages';
 
 // ONLY CHANGE BELOW HERE
 FCKConfig.SkinPath = FCKConfig.BasePath + 'skins/silver/';

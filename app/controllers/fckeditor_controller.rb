@@ -40,14 +40,14 @@ class FckeditorController < ActionController::Base
  	    upload_file
  	  end
  	  
- 	  render :inline => RXML, :type => :rxml
+ 	  render :inline => RXML, :type => :rxml unless params[:Command] == 'FileUpload'
  	end 
  	
   def get_folders_and_files(include_files = true)
-    @url = UPLOADED + params[:CurrentFolder]
     @folders = Array.new
     @files = {}
-    @current_folder = UPLOADED_ROOT + params[:CurrentFolder]
+    @url = upload_directory_path
+    @current_folder = current_directory_path
     Dir.entries(@current_folder).each do |entry|
       next if entry =~ /^\./
       path = @current_folder + entry
@@ -58,7 +58,7 @@ class FckeditorController < ActionController::Base
 
   def create_folder
     begin 
-      @url = UPLOADED_ROOT + params[:CurrentFolder]
+      @url = current_directory_path
       path = @url + params[:NewFolderName]
       if !(File.stat(@url).writable?)
         @errorNumber = 103
@@ -76,28 +76,52 @@ class FckeditorController < ActionController::Base
   end
   
   def upload_file
-    new_file = params[:NewFile]
+    @new_file = params[:NewFile]
+    @url = upload_directory_path
     begin
-      ftype = new_file.content_type.strip
+      ftype = @new_file.content_type.strip
       if ! MIME_TYPES.include?(ftype)
         @errorNumber = 202
         puts "#{ftype} is invalid MIME type"
         raise "#{ftype} is invalid MIME type"
       else
-        dir = UPLOADED_ROOT + (params[:CurrentFolder] ? params[:CurrentFolder] : "/")
-        path = dir + new_file.original_filename
+        path = current_directory_path + "/" + @new_file.original_filename
         File.open(path,"wb",0664) do |fp|
-          FileUtils.copy_stream(new_file, fp)
+          FileUtils.copy_stream(@new_file, fp)
         end
         @errorNumber = 0
       end
     rescue => e
       @errorNumber = 110 if @errorNumber.nil?
     end
-    render :inline => 'page << "window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber}, \'#{new_file}\');"', :type => :rjs
+    render :inline => 'page << "window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber}, \'#{@new_file}\');"', :type => :rjs
   end
 
   def upload
     self.upload_file
+  end
+  
+  include ActionView::Helpers::TextHelper
+  def check_spelling
+    require 'cgi'
+    require 'fckeditor_spell_check'
+
+    @original_text = params[:textinputs] ? params[:textinputs].first : ''
+    plain_text = strip_tags(CGI.unescape(@original_text))
+    @words = FckeditorSpellCheck.check_spelling(plain_text)
+
+    render :file => "#{Fckeditor::PLUGIN_VIEWS_PATH}/fckeditor/spell_check.rhtml"
+  end
+  
+  private
+  def current_directory_path
+    base_dir = "#{UPLOADED_ROOT}/#{params[:Type]}"
+    Dir.mkdir(base_dir,0775) unless File.exists?(base_dir)
+    "#{base_dir}#{params[:CurrentFolder]}"
+  end
+  
+  def upload_directory_path
+    uploaded = "#{UPLOADED}/#{params[:Type]}"
+    "#{uploaded}#{params[:CurrentFolder]}"
   end
 end

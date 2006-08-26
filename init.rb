@@ -13,3 +13,17 @@ ActionView::Base.send(:include, Fckeditor::Helper)
 
 # require the controller
 require 'fckeditor_controller'
+
+# add a route for spellcheck
+class ActionController::Routing::RouteSet
+  alias draw_without_spelling draw
+  def draw_with_spelling
+    draw_without_spelling do |map|
+      map.connect 'fckeditor/check_spelling', :controller => 'fckeditor', :action => 'check_spelling'
+      map.connect 'fckeditor/command', :controller => 'fckeditor', :action => 'command'
+      map.connect 'fckeditor/upload', :controller => 'fckeditor', :action => 'upload'
+      yield map
+    end
+  end
+  alias draw draw_with_spelling
+end

@@ -108,8 +108,9 @@ FCKConfig.FontFormats	= 'p;div;pre;address;h1;h2;h3;h4;h5;h6' ;
 FCKConfig.StylesXmlPath		= FCKConfig.EditorPath + 'fckstyles.xml' ;
 FCKConfig.TemplatesXmlPath	= FCKConfig.EditorPath + 'fcktemplates.xml' ;
 
-FCKConfig.SpellChecker			= 'ieSpell' ;	// 'ieSpell' | 'SpellerPages'
-FCKConfig.IeSpellDownloadUrl	= 'http://iespell.huhbw.com/ieSpellSetup220647.exe' ;
+//FCKConfig.SpellChecker			= 'ieSpell' ;	// 'ieSpell' | 'SpellerPages'
+FCKConfig.SpellChecker			= 'SpellerPages'
+//FCKConfig.IeSpellDownloadUrl	= 'http://iespell.huhbw.com/ieSpellSetup220647.exe' ;
 
 FCKConfig.MaxUndoLevels = 15 ;
 

@@ -10,6 +10,11 @@ Credits to:
 "Implementation details for FCKEditor integration with Ruby on Rails" - http://public.ok2life.com/welcome/index/49.html 
 "FCKEditor On Rails" - http://www.underpantsgnome.com/projects/fckeditor-on-rails/
 
+And for the spell checker, which Ken Pratt created a patch for:
+
+Ken Pratt: www.kenpratt.net
+http://softiesonrails.com/articles/2006/02/14/fckeditor-with-spell-check-on-rails
+
 -------
 
 This plugin installs the FCKeditor editor into your rails app, along with some helpers to use in your views.
@@ -61,12 +66,22 @@ To use a remote form you need to do something like this
 
 If you forget to put in the :before it won't work
 
+Spell Check
+-----------
+
+Basically ensure you have aspell installed and available in your path. If running on Windows then the expected install path is:
+
+'c:\program files\aspell\bin\aspell'
+
+If you install elsewhere then you will need to update spell_check.rb in the plugin to mirror your path. Also make sure you have this line in your fckcustom.js file:
+
+FCKConfig.SpellChecker = 'SpellerPages';
+
 Issues / TODO's
 ------
 
 1) There is a problem with uploading Flash files
 2) There are no progress indicators for the AJAX requests from the resource manager
-2) ISpell is not yet implemented
 3) No real docs....
 
 

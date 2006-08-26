@@ -8,8 +8,8 @@ module Fckeditor
   
   module Version
     MAJOR = 0
-    MINOR = 1
-    RELEASE = 5
+    MINOR = 2
+    RELEASE = 1
   end
 
   def self.version
@@ -40,7 +40,7 @@ module Fckeditor
       inputs + 
       javascript_tag( "FCKeditorAPI = null;\n" +
                       "__FCKeditorNS = null;\n" +
-                      "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}', '#{value}');\n"+
+                      "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n"+
                       "oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js';\n"+
                       "oFCKeditor.ReplaceTextarea();\n")   
     end
@@ -58,8 +58,8 @@ module Fckeditor
     def fckeditor_before_js(object, field)
       textarea_id = fckeditor_element_id(object, field)
       form_field = "#{object}_#{field}"
-      "var oEditor = FCKeditorAPI.GetInstance('"+textarea_id+"'); $('"+form_field+"').value = oEditor.GetXHTML();"
-    end
+      "var oEditor = FCKeditorAPI.GetInstance('"+textarea_id+"'); $('"+form_field+"').value = oEditor.GetXHTML()"
+    end    
   end
 end
 
@@ -67,14 +67,12 @@ module ActionView::Helpers::AssetTagHelper
   alias_method :rails_javascript_include_tag, :javascript_include_tag
   
   # Adds a new option to Rails' built-in <tt>javascript_include_tag</tt>
-  # helper - <tt>:unobtrusive</tt>. Works in the same way as <tt>:defaults</tt> - specifying 
-  # <tt>:unobtrusive</tt> will make sure the necessary javascript
+  # helper - <tt>:fckeditor</tt>. Works in the same way as <tt>:defaults</tt> - specifying 
+  # <tt>:fckeditor</tt> will make sure the necessary javascript
   # libraries and behaviours file +script+ tags are loaded. Will happily
   # work along side <tt>:defaults</tt>.
   #
-  #  <%= javascript_include_tag :defaults, :unobtrusive %>
-  #
-  # This replaces the old +unobtrusive_javascript_files+ helper.
+  #  <%= javascript_include_tag :defaults, :fckeditor %>
   def javascript_include_tag(*sources)
     main_sources, application_source = [], []
     if sources.include?(:fckeditor)
