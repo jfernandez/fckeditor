@@ -1,4 +1,4 @@
-Fckeditor: Version 0.1.5, 
+Fckeditor: Version 0.2.2
 =========================
 
 Scott Rutherford
@@ -48,7 +48,7 @@ Basically include this in the page you wish to use the editor in
 
 Then instead of the normal textarea helper from Rails use this one
 
-<%= fckeditor_textarea("object", "field", :toolbarKit => 'Simple, :width => '400', :height => '200' %>
+<%= fckeditor_textarea("object", "field", :toolbarKit => 'Simple, :width => '100%', :height => '200px' %>
 
 Thats it unless you are using AJAX
 
@@ -60,11 +60,25 @@ To use a remote form you need to do something like this
 <%= form_remote_tag :url => @options.merge(:controller => @scaffold_controller),
                     :before => fckeditor_before_js('note', 'text') %>
 
-    <%= fckeditor_textarea( "note", "text", :height => '200', :ajax => true ) %> 
+    <%= fckeditor_textarea( "note", "text", :ajax => true ) %> 
 
 <%= end_form_tag %>
 
-If you forget to put in the :before it won't work
+If you forget to put in the :before it won't work, you can also use the fckeditor_form_remote_tag described below
+
+Multiple Editors in a form
+--------------------------
+
+To create a form using multiple editors use the fckeditor_form_remote_tag helper and pass the :editors option. This takes an hash of model symbol keys with each having 
+an array as its value. The array should contain the list of fields that will have editors attached to them.
+
+<%= fckeditor_form_remote_tag :url => @options.merge(:controller => @scaffold_controller),
+                              :editors => { :multinote => ['text1', 'text2'] } %>
+
+    <%= fckeditor_textarea( "multinote", "text1", :ajax => true ) %> 
+    <%= fckeditor_textarea( "multinote", "text2", :ajax => true ) %> 
+
+<%= end_form_tag %>
 
 Spell Check
 -----------
@@ -80,8 +94,7 @@ FCKConfig.SpellChecker = 'SpellerPages';
 Issues / TODO's
 ------
 
-1) There is a problem with uploading Flash files
-2) There are no progress indicators for the AJAX requests from the resource manager
-3) No real docs....
+1) There are no progress indicators for the AJAX requests from the resource manager
+2) Occasional issues with Flash upload
 
 

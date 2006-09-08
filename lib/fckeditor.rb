@@ -9,7 +9,7 @@ module Fckeditor
   module Version
     MAJOR = 0
     MINOR = 2
-    RELEASE = 1
+    RELEASE = 2
   end
 
   def self.version
@@ -31,18 +31,28 @@ module Fckeditor
       toolbarSet = options[:toolbarSet].nil? ? 'Default' : options[:toolbarSet]
       
       if options[:ajax]
-        inputs = "<input type='hidden' id='#{object}_#{field}' name='#{object}[#{field}]'>\n"+    
+        inputs = "<input type='hidden' id='#{id}_hidden' name='#{object}[#{field}]'>\n"+    
                  "<textarea id='#{id}' #{cols} #{rows} name='#{id}'>#{value}</textarea>\n"
       else 
         inputs = "<textarea id='#{id}' #{cols} #{rows} name='#{object}[#{field}]'>#{value}</textarea>\n"
       end
 
       inputs + 
-      javascript_tag( "FCKeditorAPI = null;\n" +
-                      "__FCKeditorNS = null;\n" +
-                      "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n"+
+      javascript_tag( "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n"+
                       "oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js';\n"+
                       "oFCKeditor.ReplaceTextarea();\n")   
+    end
+    
+    def fckeditor_form_remote_tag(options = {})
+      editors = options[:editors]
+      before = ""
+      editors.keys.each do |e|
+        editors[e].each do |f|
+          before += fckeditor_before_js(e, f)
+        end
+      end
+      options[:before] = options[:before].nil? ? before : before + options[:before] 
+      form_remote_tag(options)
     end
 
     def fckeditor_element_id(object, field)
@@ -56,9 +66,8 @@ module Fckeditor
     end
 
     def fckeditor_before_js(object, field)
-      textarea_id = fckeditor_element_id(object, field)
-      form_field = "#{object}_#{field}"
-      "var oEditor = FCKeditorAPI.GetInstance('"+textarea_id+"'); $('"+form_field+"').value = oEditor.GetXHTML()"
+      id = fckeditor_element_id(object, field)
+      "var oEditor = FCKeditorAPI.GetInstance('"+id+"'); $('"+id+"_hidden').value = oEditor.GetXHTML();"
     end    
   end
 end
