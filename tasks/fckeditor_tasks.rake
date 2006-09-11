@@ -13,11 +13,11 @@ namespace :fckeditor do
     require "#{directory}lib/fckeditor_version"
     require "#{directory}lib/fckeditor_file_utils"
       
-    puts "** Installing FCKEditor Plugin version #{FckeditorVersion.version}..."           
+    puts "** Installing FCKEditor Plugin version #{FckeditorVersion.current}..."           
 
     FckeditorFileUtils.destroy_and_install 
          
-    puts "** Successfully installed FCKEditor Plugin version #{FckeditorVersion.version}"
+    puts "** Successfully installed FCKEditor Plugin version #{FckeditorVersion.current}"
   end
 
   desc "Update the FCKEditor plugin"    

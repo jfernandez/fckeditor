@@ -5,7 +5,7 @@ module Fckeditor
   PLUGIN_PUBLIC_PATH = "#{PLUGIN_PATH}/public"
   PLUGIN_CONTROLLER_PATH = "#{PLUGIN_PATH}/app/controllers"  
   PLUGIN_VIEWS_PATH = "#{PLUGIN_PATH}/app/views"  
-    
+      
   module Helper
     def fckeditor_textarea(object, field, options = {})
       value = eval("@#{object}.#{field}")

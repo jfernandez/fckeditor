@@ -26,7 +26,7 @@ end
 # Globals
 require 'lib/fckeditor_version'
 PKG_NAME = 'fckeditor_plugin'
-PKG_VERSION = FckeditorVersion.version
+PKG_VERSION = FckeditorVersion.current
 
 PKG_FILES = ['README', 'CHANGELOG', 'init.rb', 'install.rb']
 PKG_DIRECTORIES = ['app/', 'lib/', 'public/', 'tasks/', 'test/']
