@@ -94,7 +94,10 @@ class FckeditorController < ActionController::Base
     rescue => e
       @errorNumber = 110 if @errorNumber.nil?
     end
-    render :inline => 'page << "window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber}, \'#{@new_file}\');"', :type => :rjs
+    
+    # Fix provided by Nicola Piccinini -- http://superfluo.org
+    render :text => %Q'<script>window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber});</script>'
+    #render :inline => 'page << "window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber}, \'#{@new_file}\');"', :type => :rjs
   end
 
   def upload

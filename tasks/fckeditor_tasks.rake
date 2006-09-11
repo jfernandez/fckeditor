@@ -10,18 +10,19 @@ namespace :fckeditor do
     
     directory = File.join(RAILS_ROOT, '/vendor/plugins/fckeditor/')
     require "#{directory}lib/fckeditor"
+    require "#{directory}lib/fckeditor_version"
     require "#{directory}lib/fckeditor_file_utils"
       
-    puts "** Installing FCKEditor Plugin version #{Fckeditor.version}..."           
+    puts "** Installing FCKEditor Plugin version #{FckeditorVersion.version}..."           
 
     FckeditorFileUtils.destroy_and_install 
          
-    puts "** Successfully installed FCKEditor Plugin version #{Fckeditor.version}"
+    puts "** Successfully installed FCKEditor Plugin version #{FckeditorVersion.version}"
   end
 
   desc "Update the FCKEditor plugin"    
   task :update do
     puts "Not yet implemented."
-  end
+  end  
 end
 

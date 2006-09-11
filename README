@@ -1,4 +1,4 @@
-Fckeditor: Version 0.2.2
+Fckeditor: Version 0.2.3
 =========================
 
 Scott Rutherford
@@ -14,6 +14,8 @@ And for the spell checker, which Ken Pratt created a patch for:
 
 Ken Pratt: www.kenpratt.net
 http://softiesonrails.com/articles/2006/02/14/fckeditor-with-spell-check-on-rails
+
+Nicola Piccinini: http://superfluo.org for the resource manager upload patch
 
 -------
 
@@ -96,5 +98,6 @@ Issues / TODO's
 
 1) There are no progress indicators for the AJAX requests from the resource manager
 2) Occasional issues with Flash upload
+3) Won't install properly with frozen edge Rails
 
 
