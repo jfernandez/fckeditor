@@ -31,7 +31,7 @@ require 'fckeditor_controller'
 
 # add a route for spellcheck
 class ActionController::Routing::RouteSet
-  unless (RAILS_ENV.match('test'))
+  unless (instance_methods.include?('draw_with_fckeditor'))
     class_eval <<-"end_eval", __FILE__, __LINE__  
       alias draw_without_fckeditor draw
       def draw_with_fckeditor

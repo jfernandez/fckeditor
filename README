@@ -50,7 +50,7 @@ Basically include this in the page you wish to use the editor in
 
 Then instead of the normal textarea helper from Rails use this one
 
-<%= fckeditor_textarea("object", "field", :toolbarKit => 'Simple, :width => '100%', :height => '200px' %>
+<%= fckeditor_textarea("object", "field", :toolbarSet => 'Simple, :width => '100%', :height => '200px' %>
 
 Thats it unless you are using AJAX
 
