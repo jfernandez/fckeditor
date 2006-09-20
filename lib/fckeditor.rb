@@ -46,12 +46,12 @@ module Fckeditor
     end
 
     def fckeditor_element_id(object, field)
-      id = eval("@#{object}.id") rescue "new"
+      id = eval("@#{object}.id")
       "#{object}_#{id}_#{field}_editor"    
     end
 
     def fckeditor_div_id(object, field)
-      id = eval("@#{object}.id") rescue "new"
+      id = eval("@#{object}.id")  
       "div-#{object}-#{id}-#{field}-editor" 
     end
 
