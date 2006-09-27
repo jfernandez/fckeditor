@@ -28,8 +28,6 @@ module Fckeditor
       end
 
       base_path = @request.relative_url_root.to_s+'/javascripts/fckeditor/'
-      puts "FCKEDITOR BASE PATH: #{base_path}"
-      
       inputs + 
       javascript_tag( "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n"+
                       "oFCKeditor.BasePath = \"#{base_path}\"\n"+
