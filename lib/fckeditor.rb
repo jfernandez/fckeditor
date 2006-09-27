@@ -29,8 +29,15 @@ module Fckeditor
 
       inputs + 
       javascript_tag( "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n"+
-                      "oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js';\n"+
+                      "oFCKeditor.BasePath = \"#{url_for('/javascripts/fckeditor/')}\"\n"+
+                      "oFCKeditor.Config['CustomConfigurationsPath'] = '../../fckcustom.js';\n"+
                       "oFCKeditor.ReplaceTextarea();\n")   
+                      
+      # REPLACED IN 3.0.1 with above to allow for relative urls and non root deployment
+      # inputs + 
+      # javascript_tag( "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n"+
+      #                 "oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js';\n"+
+      #                 "oFCKeditor.ReplaceTextarea();\n")   
     end
     
     def fckeditor_form_remote_tag(options = {})
