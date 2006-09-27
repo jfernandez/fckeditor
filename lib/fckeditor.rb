@@ -27,9 +27,12 @@ module Fckeditor
         inputs = "<textarea id='#{id}' #{cols} #{rows} name='#{object}[#{field}]'>#{value}</textarea>\n"
       end
 
+      base_path = @request.relative_url_root.to_s+'/javascripts/fckeditor/'
+      puts "FCKEDITOR BASE PATH: #{base_path}"
+      
       inputs + 
       javascript_tag( "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n"+
-                      "oFCKeditor.BasePath = \"#{url_for('/javascripts/fckeditor/')}\"\n"+
+                      "oFCKeditor.BasePath = \"#{base_path}\"\n"+
                       "oFCKeditor.Config['CustomConfigurationsPath'] = '../../fckcustom.js';\n"+
                       "oFCKeditor.ReplaceTextarea();\n")   
                       
