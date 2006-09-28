@@ -70,6 +70,7 @@ module Fckeditor
   end
 end
 
+include ActionView
 module ActionView::Helpers::AssetTagHelper
   alias_method :rails_javascript_include_tag, :javascript_include_tag
   
