@@ -22,9 +22,9 @@ class ActionController::Routing::RouteSet
       alias draw_without_fckeditor draw
       def draw_with_fckeditor
         draw_without_fckeditor do |map|
-          map.connect '/fckeditor/check_spelling', :controller => 'fckeditor', :action => 'check_spelling'
-          map.connect '/fckeditor/command', :controller => 'fckeditor', :action => 'command'
-          map.connect '/fckeditor/upload', :controller => 'fckeditor', :action => 'upload'
+          map.connect 'fckeditor/check_spelling', :controller => 'fckeditor', :action => 'check_spelling'
+          map.connect 'fckeditor/command', :controller => 'fckeditor', :action => 'command'
+          map.connect 'fckeditor/upload', :controller => 'fckeditor', :action => 'upload'
           yield map
         end
       end
