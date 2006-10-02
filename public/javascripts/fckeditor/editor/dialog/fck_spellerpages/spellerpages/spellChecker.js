@@ -22,7 +22,10 @@ function spellChecker( textObject ) {
 	//this.spellCheckScript = 'server-scripts/spellchecker.php';				// by FredCK
 	//this.spellCheckScript = '/cgi-bin/spellchecker.pl';
 	
-  this.spellCheckScript = '/fckeditor/check_spelling';
+//  this.spellCheckScript = '/fckeditor/check_spelling';
+	var currentUrl = location + "";
+	// want everything to the left of /javascripts/....
+  this.spellCheckScript = currentUrl.substring(0,currentUrl.indexOf('/javascripts'))+'/fckeditor/check_spelling';
 	
 	// values used to keep track of what happened to a word
 	this.replWordFlag = "R";	// single replace

@@ -1,14 +1,14 @@
 // CHANGE FOR APPS HOSTED IN SUBDIRECTORY
-relativePath = '';
+FCKRelativePath = '';
 
 // DON'T CHANGE THESE
-FCKConfig.LinkBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Connector='+relativePath+'/fckeditor/command';
-FCKConfig.ImageBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Type=Image&Connector='+relativePath+'/fckeditor/command';
-FCKConfig.FlashBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Type=Flash&Connector='+relativePath+'/fckeditor/command';
+FCKConfig.LinkBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Connector='+FCKRelativePath+'/fckeditor/command';
+FCKConfig.ImageBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Type=Image&Connector='+FCKRelativePath+'/fckeditor/command';
+FCKConfig.FlashBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Type=Flash&Connector='+FCKRelativePath+'/fckeditor/command';
 
-FCKConfig.LinkUploadURL = relativePath+'/fckeditor/upload';
-FCKConfig.ImageUploadURL = relativePath+'/fckeditor/upload?Type=Image';
-FCKConfig.FlashUploadURL = relativePath+'/fckeditor/upload?Type=Flash';
+FCKConfig.LinkUploadURL = FCKRelativePath+'/fckeditor/upload';
+FCKConfig.ImageUploadURL = FCKRelativePath+'/fckeditor/upload?Type=Image';
+FCKConfig.FlashUploadURL = FCKRelativePath+'/fckeditor/upload?Type=Flash';
 FCKConfig.AllowQueryStringDebug = false;
 FCKConfig.SpellChecker = 'SpellerPages';
 
