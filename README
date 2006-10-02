@@ -1,4 +1,4 @@
-Fckeditor: Version 0.3.1
+Fckeditor: Version 0.3.2
 =========================
 
 Scott Rutherford
@@ -41,8 +41,25 @@ Basically the whole of the FCKeditor suite is copied to: public/javascripts/fcke
 
 There is a separate config file copied to: public/javascripts/fckcustom.js, that you can use to customize the install. This file is never overriden by upgrades or reinstalls
 
+IMPORTANT
+---------
+
+If you are hosting your rails app in a subdirectory you need to open:
+
+public/javascripts/fckcustom.js
+
+and modify the FCKRelativePath = ''; to suite your needs.
+
+For example if I have an app at www.mydomain.com/app/
+
+then the line should read:
+
+FCKRelativePath = '/app';
+
+
 Usage
 -----
+
 
 Basically include this in the page you wish to use the editor in
 
