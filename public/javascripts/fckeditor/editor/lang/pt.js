@@ -258,6 +258,7 @@ DlgLnkPopTop		: "Posição Direita",
 DlnLnkMsgNoUrl		: "Por favor introduza a hiperligação URL",
 DlnLnkMsgNoEMail	: "Por favor introduza o endereço de e-mail",
 DlnLnkMsgNoAnchor	: "Por favor seleccione uma referência",
+DlnLnkMsgInvPopName	: "The popup name must begin with an alphabetic character and must not contain spaces",	//MISSING
 
 // Color Dialog
 DlgColorTitle		: "Seleccionar Cor",
@@ -374,8 +375,11 @@ DlgSpellManyChanges		: "Verificação ortográfica completa: %1 palavras alterad
 IeSpellDownload			: " Verificação ortográfica não instalada. Quer descarregar agora?",
 
 // Button Dialog
-DlgButtonText	: "Texto (Valor)",
-DlgButtonType	: "Tipo",
+DlgButtonText		: "Texto (Valor)",
+DlgButtonType		: "Tipo",
+DlgButtonTypeBtn	: "Button",	//MISSING
+DlgButtonTypeSbm	: "Submit",	//MISSING
+DlgButtonTypeRst	: "Reset",	//MISSING
 
 // Checkbox and Radio Button Dialogs
 DlgCheckboxName		: "Nome",
@@ -424,6 +428,7 @@ DlgHiddenValue	: "Valor",
 // Bulleted List Dialog
 BulletedListProp	: "Propriedades da Marca",
 NumberedListProp	: "Propriedades da Numeração",
+DlgLstStart			: "Start",	//MISSING
 DlgLstType			: "Tipo",
 DlgLstTypeCircle	: "Circulo",
 DlgLstTypeDisc		: "Disco",
@@ -446,6 +451,15 @@ DlgDocLangDirLTR	: "Esquerda à Direita (LTR)",
 DlgDocLangDirRTL	: "Direita à Esquerda (RTL)",
 DlgDocLangCode		: "Código de Idioma",
 DlgDocCharSet		: "Codificação de Caracteres",
+DlgDocCharSetCE		: "Central European",	//MISSING
+DlgDocCharSetCT		: "Chinese Traditional (Big5)",	//MISSING
+DlgDocCharSetCR		: "Cyrillic",	//MISSING
+DlgDocCharSetGR		: "Greek",	//MISSING
+DlgDocCharSetJP		: "Japanese",	//MISSING
+DlgDocCharSetKR		: "Korean",	//MISSING
+DlgDocCharSetTR		: "Turkish",	//MISSING
+DlgDocCharSetUN		: "Unicode (UTF-8)",	//MISSING
+DlgDocCharSetWE		: "Western European",	//MISSING
 DlgDocCharSetOther	: "Outra Codificação de Caracteres",
 
 DlgDocDocType		: "Tipo de Cabeçalho do Documento",
@@ -475,6 +489,7 @@ DlgTemplatesTitle	: "Modelo de Conteúdo",
 DlgTemplatesSelMsg	: "Por favor, seleccione o modelo a abrir no editor<br>(o conteúdo actual será perdido):",
 DlgTemplatesLoading	: "A carregar a lista de modelos. Aguarde por favor...",
 DlgTemplatesNoTpl	: "(Sem modelos definidos)",
+DlgTemplatesReplace	: "Replace actual contents",	//MISSING
 
 // About Dialog
 DlgAboutAboutTab	: "Acerca",

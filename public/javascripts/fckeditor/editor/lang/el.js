@@ -259,6 +259,7 @@ DlgLnkPopTop		: "Τοποθεσία Πάνω Άκρης",
 DlnLnkMsgNoUrl		: "Εισάγετε την τοποθεσία (URL) του υπερσυνδέσμου (Link)",
 DlnLnkMsgNoEMail	: "Εισάγετε την διεύθυνση ηλεκτρονικού ταχυδρομείου",
 DlnLnkMsgNoAnchor	: "Επιλέξτε ένα Anchor",
+DlnLnkMsgInvPopName	: "Το όνομα του popup πρέπει να αρχίζει με χαρακτήρα της αλφαβήτου και να μην περιέχει κενά",
 
 // Color Dialog
 DlgColorTitle		: "Επιλογή χρώματος",
@@ -375,8 +376,11 @@ DlgSpellManyChanges		: "Ο ορθογραφικός έλεγχος ολοκλη�
 IeSpellDownload			: "Δεν υπάρχει εγκατεστημένος ορθογράφος. Θέλετε να τον κατεβάσετε τώρα;",
 
 // Button Dialog
-DlgButtonText	: "Κείμενο (Τιμή)",
-DlgButtonType	: "Τύπος",
+DlgButtonText		: "Κείμενο (Τιμή)",
+DlgButtonType		: "Τύπος",
+DlgButtonTypeBtn	: "Κουμπί",
+DlgButtonTypeSbm	: "Καταχώρηση",
+DlgButtonTypeRst	: "Επαναφορά",
 
 // Checkbox and Radio Button Dialogs
 DlgCheckboxName		: "Όνομα",
@@ -425,6 +429,7 @@ DlgHiddenValue	: "Τιμή",
 // Bulleted List Dialog
 BulletedListProp	: "Ιδιότητες λίστας Bulleted",
 NumberedListProp	: "Ιδιότητες αριθμημένης λίστας ",
+DlgLstStart			: "Αρχή",
 DlgLstType			: "Τύπος",
 DlgLstTypeCircle	: "Κύκλος",
 DlgLstTypeDisc		: "Δίσκος",
@@ -447,6 +452,15 @@ DlgDocLangDirLTR	: "αριστερά προς δεξιά (LTR)",
 DlgDocLangDirRTL	: "δεξιά προς αριστερά (RTL)",
 DlgDocLangCode		: "Κωδικός γλώσσας",
 DlgDocCharSet		: "Κωδικοποίηση χαρακτήρων",
+DlgDocCharSetCE		: "Κεντρικής Ευρώπης",
+DlgDocCharSetCT		: "Παραδοσιακά κινέζικα (Big5)",
+DlgDocCharSetCR		: "Κυριλλική",
+DlgDocCharSetGR		: "Ελληνική",
+DlgDocCharSetJP		: "Ιαπωνική",
+DlgDocCharSetKR		: "Κορεάτικη",
+DlgDocCharSetTR		: "Τουρκική",
+DlgDocCharSetUN		: "Διεθνής (UTF-8)",
+DlgDocCharSetWE		: "Δυτικής Ευρώπης",
 DlgDocCharSetOther	: "Άλλη κωδικοποίηση χαρακτήρων",
 
 DlgDocDocType		: "Επικεφαλίδα τύπου εγγράφου",
@@ -476,6 +490,7 @@ DlgTemplatesTitle	: "Πρότυπα περιεχομένου",
 DlgTemplatesSelMsg	: "Παρακαλώ επιλέξτε πρότυπο για εισαγωγή στο πρόγραμμα<br>(τα υπάρχοντα περιεχόμενα θα χαθούν):",
 DlgTemplatesLoading	: "Φόρτωση καταλόγου προτύπων. Παρακαλώ περιμένετε...",
 DlgTemplatesNoTpl	: "(Δεν έχουν καθοριστεί πρότυπα)",
+DlgTemplatesReplace	: "Αντικατάσταση υπάρχοντων περιεχομένων",
 
 // About Dialog
 DlgAboutAboutTab	: "Σχετικά",

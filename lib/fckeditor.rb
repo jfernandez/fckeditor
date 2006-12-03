@@ -32,13 +32,7 @@ module Fckeditor
       javascript_tag( "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n"+
                       "oFCKeditor.BasePath = \"#{base_path}\"\n"+
                       "oFCKeditor.Config['CustomConfigurationsPath'] = '../../fckcustom.js';\n"+
-                      "oFCKeditor.ReplaceTextarea();\n")   
-                      
-      # REPLACED IN 3.0.1 with above to allow for relative urls and non root deployment
-      # inputs + 
-      # javascript_tag( "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n"+
-      #                 "oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js';\n"+
-      #                 "oFCKeditor.ReplaceTextarea();\n")   
+                      "oFCKeditor.ReplaceTextarea();\n")                         
     end
     
     def fckeditor_form_remote_tag(options = {})
@@ -52,7 +46,15 @@ module Fckeditor
       options[:before] = options[:before].nil? ? before : before + options[:before] 
       form_remote_tag(options)
     end
-
+    
+    def fckeditor_remote_form_for(object_name, *args, &proc)
+      options = args.last.is_a?(Hash) ? args.pop : {}
+      concat(fckeditor_form_remote_tag(options), proc.binding)
+      fields_for(object_name, *(args << options), &proc)
+      concat('</form>', proc.binding)
+    end
+    alias_method :fckeditor_form_remote_for, :fckeditor_remote_form_for
+    
     def fckeditor_element_id(object, field)
       id = eval("@#{object}.id")
       "#{object}_#{id}_#{field}_editor"    
@@ -74,12 +76,6 @@ include ActionView
 module ActionView::Helpers::AssetTagHelper
   alias_method :rails_javascript_include_tag, :javascript_include_tag
   
-  # Adds a new option to Rails' built-in <tt>javascript_include_tag</tt>
-  # helper - <tt>:fckeditor</tt>. Works in the same way as <tt>:defaults</tt> - specifying 
-  # <tt>:fckeditor</tt> will make sure the necessary javascript
-  # libraries and behaviours file +script+ tags are loaded. Will happily
-  # work along side <tt>:defaults</tt>.
-  #
   #  <%= javascript_include_tag :defaults, :fckeditor %>
   def javascript_include_tag(*sources)
     main_sources, application_source = [], []

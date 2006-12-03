@@ -258,6 +258,7 @@ DlgLnkPopTop		: "Posición Derecha",
 DlnLnkMsgNoUrl		: "Por favor tipee el vínculo URL",
 DlnLnkMsgNoEMail	: "Por favor tipee la dirección de e-mail",
 DlnLnkMsgNoAnchor	: "Por favor seleccione una referencia",
+DlnLnkMsgInvPopName	: "The popup name must begin with an alphabetic character and must not contain spaces",	//MISSING
 
 // Color Dialog
 DlgColorTitle		: "Seleccionar Color",
@@ -374,8 +375,11 @@ DlgSpellManyChanges		: "Control finalizado: se ha cambiado %1 palabras",
 IeSpellDownload			: "Módulo de Control de Ortografía no instalado. ¿Desea descargarlo ahora?",
 
 // Button Dialog
-DlgButtonText	: "Texto (Valor)",
-DlgButtonType	: "Tipo",
+DlgButtonText		: "Texto (Valor)",
+DlgButtonType		: "Tipo",
+DlgButtonTypeBtn	: "Button",	//MISSING
+DlgButtonTypeSbm	: "Submit",	//MISSING
+DlgButtonTypeRst	: "Reset",	//MISSING
 
 // Checkbox and Radio Button Dialogs
 DlgCheckboxName		: "Nombre",
@@ -424,6 +428,7 @@ DlgHiddenValue	: "Valor",
 // Bulleted List Dialog
 BulletedListProp	: "Propiedades de Viñetas",
 NumberedListProp	: "Propiedades de Numeraciones",
+DlgLstStart			: "Start",	//MISSING
 DlgLstType			: "Tipo",
 DlgLstTypeCircle	: "Círculo",
 DlgLstTypeDisc		: "Disco",
@@ -446,6 +451,15 @@ DlgDocLangDirLTR	: "Izq. a Derecha (LTR)",
 DlgDocLangDirRTL	: "Der. a Izquierda (RTL)",
 DlgDocLangCode		: "Código de Idioma",
 DlgDocCharSet		: "Codif. de Conjunto de Caracteres",
+DlgDocCharSetCE		: "Central European",	//MISSING
+DlgDocCharSetCT		: "Chinese Traditional (Big5)",	//MISSING
+DlgDocCharSetCR		: "Cyrillic",	//MISSING
+DlgDocCharSetGR		: "Greek",	//MISSING
+DlgDocCharSetJP		: "Japanese",	//MISSING
+DlgDocCharSetKR		: "Korean",	//MISSING
+DlgDocCharSetTR		: "Turkish",	//MISSING
+DlgDocCharSetUN		: "Unicode (UTF-8)",	//MISSING
+DlgDocCharSetWE		: "Western European",	//MISSING
 DlgDocCharSetOther	: "Otra Codificación",
 
 DlgDocDocType		: "Encabezado de Tipo de Documento",
@@ -475,6 +489,7 @@ DlgTemplatesTitle	: "Contenido de Plantillas",
 DlgTemplatesSelMsg	: "Por favor selecciona la plantilla a abrir en el editor<br>(el contenido actual se perderá):",
 DlgTemplatesLoading	: "Cargando lista de Plantillas. Por favor, aguarde...",
 DlgTemplatesNoTpl	: "(No hay plantillas definidas)",
+DlgTemplatesReplace	: "Replace actual contents",	//MISSING
 
 // About Dialog
 DlgAboutAboutTab	: "Acerca de",

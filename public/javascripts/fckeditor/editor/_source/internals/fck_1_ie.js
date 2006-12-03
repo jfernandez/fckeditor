@@ -233,6 +233,8 @@ FCK.InsertHtml = function( html )
 
 	// Insert the HTML.
 	oSel.createRange().pasteHTML( html ) ;
+	
+	FCKDocumentProcessor.Process( FCK.EditorDocument ) ;
 }
 
 FCK.SetInnerHtml = function( html )		// IE Only

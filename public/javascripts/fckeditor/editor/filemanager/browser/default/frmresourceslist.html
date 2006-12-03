@@ -85,7 +85,7 @@ function LoadResources( resourceType, folderPath )
 {
 	oListManager.Clear() ;
 	oConnector.ResourceType = resourceType ;
-	oConnector.CurrentFolder = folderPath
+	oConnector.CurrentFolder = folderPath ;
 	oConnector.SendCommand( 'GetFoldersAndFiles', null, GetFoldersAndFilesCallBack ) ;
 }
 
@@ -123,7 +123,12 @@ function GetFoldersAndFilesCallBack( fckXml )
 		var oNode = oNodes[i] ;
 		var sFileName = oNode.attributes.getNamedItem('name').value ;
 		var sFileSize = oNode.attributes.getNamedItem('size').value ;
-		oHtml.Append( oListManager.GetFileRowHtml( sFileName, sCurrentFolderUrl + sFileName, sFileSize ) ) ;
+
+		// Get the optional "url" attribute. If not available, build the url.
+		var oFileUrlAtt = oNodes[i].attributes.getNamedItem('url') ;
+		var sFileUrl = oFileUrlAtt != null ? oFileUrlAtt.value : sCurrentFolderUrl + sFileName ;
+		
+		oHtml.Append( oListManager.GetFileRowHtml( sFileName, sFileUrl, sFileSize ) ) ;
 	}
 
 	oHtml.Append( '</table>' ) ;

@@ -46,7 +46,7 @@ var FCKPanel = function( parentWindow )
 		oIFrame.style.zIndex		= FCKConfig.FloatingPanelsZIndex ;
 		oIFrame.width = oIFrame.height = 0 ;
 
-		if ( this._Window == window.parent )
+		if ( this._Window == window.parent && window.frameElement )
 			window.frameElement.parentNode.insertBefore( oIFrame, window.frameElement ) ;
 		else
 			this._Window.document.body.appendChild( oIFrame ) ;
@@ -132,7 +132,8 @@ FCKPanel.prototype.Show = function( x, y, relElement, width, height )
 	else
 	{
 		// Do not fire OnBlur while the panel is opened.
-		FCKFocusManager.Lock() ;
+		if ( typeof( FCKFocusManager ) != 'undefined' )
+			FCKFocusManager.Lock() ;
 
 		if ( this.ParentPanel )
 			this.ParentPanel.Lock() ;
@@ -213,7 +214,8 @@ FCKPanel.prototype.Hide = function( ignoreOnHide )
 			return ;
 		
 		// Enable the editor to fire the "OnBlur".
-		FCKFocusManager.Unlock() ;
+		if ( typeof( FCKFocusManager ) != 'undefined' )
+			FCKFocusManager.Unlock() ;
 
 		// It is better to set the sizes to 0, otherwise Firefox would have 
 		// rendering problems.

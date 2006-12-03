@@ -1,4 +1,4 @@
-Fckeditor: Version 0.3.2
+Fckeditor: Version 0.4.0
 =========================
 
 Scott Rutherford
@@ -15,7 +15,7 @@ And for the spell checker, which Ken Pratt created a patch for:
 Ken Pratt: www.kenpratt.net
 http://softiesonrails.com/articles/2006/02/14/fckeditor-with-spell-check-on-rails
 
-Nicola Piccinini: http://superfluo.org for the resource manager upload patch
+Nicola Piccinini: http://superfluo.org for various bits and pieces
 
 -------
 
@@ -98,6 +98,8 @@ an array as its value. The array should contain the list of fields that will hav
     <%= fckeditor_textarea( "multinote", "text2", :ajax => true ) %> 
 
 <%= end_form_tag %>
+
+There is also a fckeditor_remote_form_for version.
 
 Spell Check
 -----------

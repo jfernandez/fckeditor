@@ -1,4 +1,6 @@
 require 'fileutils'
+require 'tmpdir'
+
 class FckeditorController < ActionController::Base
   UPLOADED = "/uploads"
   UPLOADED_ROOT = RAILS_ROOT + "/public" + UPLOADED
@@ -46,13 +48,17 @@ class FckeditorController < ActionController::Base
   def get_folders_and_files(include_files = true)
     @folders = Array.new
     @files = {}
-    @url = upload_directory_path
-    @current_folder = current_directory_path
-    Dir.entries(@current_folder).each do |entry|
-      next if entry =~ /^\./
-      path = @current_folder + entry
-      @folders.push entry if FileTest.directory?(path)
-      @files[entry] = (File.size(path) / 1024) if (include_files and FileTest.file?(path))
+    begin
+      @url = upload_directory_path
+      @current_folder = current_directory_path
+      Dir.entries(@current_folder).each do |entry|
+        next if entry =~ /^\./
+        path = @current_folder + entry
+        @folders.push entry if FileTest.directory?(path)
+        @files[entry] = (File.size(path) / 1024) if (include_files and FileTest.file?(path))
+      end
+    rescue => e
+      @errorNumber = 110 if @errorNumber.nil?
     end
   end
 
@@ -76,9 +82,9 @@ class FckeditorController < ActionController::Base
   end
   
   def upload_file
-    @new_file = params[:NewFile]
-    @url = upload_directory_path
     begin
+      @new_file = check_file(params[:NewFile])
+      @url = upload_directory_path
       ftype = @new_file.content_type.strip
       if ! MIME_TYPES.include?(ftype)
         @errorNumber = 202
@@ -94,10 +100,8 @@ class FckeditorController < ActionController::Base
     rescue => e
       @errorNumber = 110 if @errorNumber.nil?
     end
-    
-    # Fix provided by Nicola Piccinini -- http://superfluo.org
+
     render :text => %Q'<script>window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber});</script>'
-    #render :inline => 'page << "window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber}, \'#{@new_file}\');"', :type => :rjs
   end
 
   def upload
@@ -120,11 +124,29 @@ class FckeditorController < ActionController::Base
   def current_directory_path
     base_dir = "#{UPLOADED_ROOT}/#{params[:Type]}"
     Dir.mkdir(base_dir,0775) unless File.exists?(base_dir)
-    "#{base_dir}#{params[:CurrentFolder]}"
+    check_path("#{base_dir}#{params[:CurrentFolder]}")
   end
   
   def upload_directory_path
     uploaded = @request.relative_url_root.to_s+"#{UPLOADED}/#{params[:Type]}"
     "#{uploaded}#{params[:CurrentFolder]}"
+  end
+  
+  def check_file(file)
+    # check that the file is a tempfile object
+    unless "#{file.class}" == "Tempfile"
+      @errorNumber = 403
+      throw Exception.new
+    end
+    file
+  end
+  
+  def check_path(path)
+    exp_path = File.expand_path path
+    if exp_path !~ %r[^#{File.expand_path(RAILS_ROOT)}/public#{UPLOADED}]
+      @errorNumber = 403
+      throw Exception.new
+    end
+    path
   end
 end

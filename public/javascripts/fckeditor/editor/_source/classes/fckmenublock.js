@@ -24,6 +24,11 @@ var FCKMenuBlock = function()
 }
 
 
+FCKMenuBlock.prototype.Count = function()
+{
+	return this._Items.length ;
+}
+
 FCKMenuBlock.prototype.AddItem = function( name, label, iconPathOrStripInfoArrayOrIndex, isDisabled )
 {
 	var oItem = new FCKMenuItem( this, name, label, iconPathOrStripInfoArrayOrIndex, isDisabled ) ;

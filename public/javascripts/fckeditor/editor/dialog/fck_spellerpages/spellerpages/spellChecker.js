@@ -11,22 +11,21 @@
 
 // constructor
 function spellChecker( textObject ) {
-
 	// public properties - configurable
-//	this.popUpUrl = '/speller/spellchecker.html';							// by FredCK
+  //	this.popUpUrl = '/speller/spellchecker.html';							// by FredCK
 	this.popUpUrl = 'fck_spellerpages/spellerpages/spellchecker.html';		// by FredCK
 	this.popUpName = 'spellchecker';
   this.popUpProps = "menu=no,width=440,height=350,top=70,left=120,resizable=yes,status=yes";	// by FredCK
 	this.popUpProps = null ;																	// by FredCK
-//	this.spellCheckScript = '/speller/server-scripts/spellchecker.php';		// by FredCK
+  //	this.spellCheckScript = '/speller/server-scripts/spellchecker.php';		// by FredCK
 	//this.spellCheckScript = 'server-scripts/spellchecker.php';				// by FredCK
 	//this.spellCheckScript = '/cgi-bin/spellchecker.pl';
-	
-//  this.spellCheckScript = '/fckeditor/check_spelling';
+
+  //  this.spellCheckScript = '/fckeditor/check_spelling';
 	var currentUrl = location + "";
 	// want everything to the left of /javascripts/....
   this.spellCheckScript = currentUrl.substring(0,currentUrl.indexOf('/javascripts'))+'/fckeditor/check_spelling';
-	
+
 	// values used to keep track of what happened to a word
 	this.replWordFlag = "R";	// single replace
 	this.ignrWordFlag = "I";	// single ignore
@@ -34,7 +33,6 @@ function spellChecker( textObject ) {
 	this.ignrAllFlag = "IA";	// ignore all occurances
 	this.fromReplAll = "~RA";	// an occurance of a "replace all" word
 	this.fromIgnrAll = "~IA";	// an occurance of a "ignore all" word
-	
 	// properties set at run time
 	this.wordFlags = new Array();
 	this.currentTextIndex = 0;

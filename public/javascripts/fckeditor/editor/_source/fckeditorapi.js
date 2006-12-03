@@ -30,8 +30,8 @@ function InitializeAPI()
 		// from a freed script" error).
 		var sScript = '\
 			var FCKeditorAPI = {\
-				Version			: \'2.3.1\',\
-				VersionBuild	: \'1062\',\
+				Version			: \'2.3.2\',\
+				VersionBuild	: \'1082\',\
 				__Instances		: new Object(),\
 				GetInstance		: function( instanceName )\
 				{\
@@ -78,7 +78,17 @@ function InitializeAPI()
 		if ( window.parent.execScript )
 			window.parent.execScript( sScript, 'JavaScript' ) ;
 		else
-			window.parent.eval( sScript ) ;
+		{
+			if ( FCKBrowserInfo.IsGecko10 )
+			{
+				// FF 1.0.4 gives an error with the above request. The
+				// following seams to work well. It could become to official
+				// implementation for all browsers, but we need to check it.
+				eval.call( window.parent, sScript ) ;
+			}
+			else
+				window.parent.eval( sScript ) ;
+		}
 		
 		FCKeditorAPI = window.parent.FCKeditorAPI ;
 	}
