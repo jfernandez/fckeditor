@@ -6,6 +6,7 @@
 namespace :fckeditor do
   desc 'Install the FCKEditor components'
   task :install do
+    require "config/environment"
     require 'fileutils'
     
     directory = File.join(RAILS_ROOT, '/vendor/plugins/fckeditor/')
