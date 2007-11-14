@@ -9,6 +9,7 @@ FCKConfig.FlashBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/br
 FCKConfig.LinkUploadURL = FCKRelativePath+'/fckeditor/upload';
 FCKConfig.ImageUploadURL = FCKRelativePath+'/fckeditor/upload?Type=Image';
 FCKConfig.FlashUploadURL = FCKRelativePath+'/fckeditor/upload?Type=Flash';
+FCKConfig.SpellerPagesServerScript = FCKRelativePath+'/fckeditor/check_spelling';
 FCKConfig.AllowQueryStringDebug = false;
 FCKConfig.SpellChecker = 'SpellerPages';
 

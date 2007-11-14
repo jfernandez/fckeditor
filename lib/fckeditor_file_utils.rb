@@ -29,6 +29,14 @@ module FckeditorFileUtils
     end
   end
   
+  def FckeditorFileUtils.backup_existing
+    source = File.join(RAILS_ROOT,'/public/javascripts/fckeditor')
+    dest = File.join(RAILS_ROOT,'/public/javascripts/fckeditor_bck')
+    
+    FileUtils.rm_r(dest) if File.exists? dest 
+    FileUtils.mv source, dest
+  end
+  
   def FckeditorFileUtils.copy_configuration
     # need to copy over the code if it doesn't already exist
     config_file = File.join(RAILS_ROOT, '/vendor/plugins/fckeditor/public/javascripts/fckcustom.js')

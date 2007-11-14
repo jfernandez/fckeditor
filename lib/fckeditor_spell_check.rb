@@ -1,5 +1,8 @@
 # Interfaces with aspell and returns results ready for FCKeditor-friendly javascript
 class FckeditorSpellCheck
+  cattr_accessor :language
+
+  @@language ||= "en_US"
 
   # call aspell and retrieve the results
   def self.check_spelling(text)
@@ -10,7 +13,8 @@ class FckeditorSpellCheck
     end
     
     # call aspell
-    command = "\"#{aspell_program}\" -a --lang=en_US --encoding=utf-8 -H 2>&1"
+    command = "\"#{aspell_program}\" -a --lang=#{language} --encoding=utf-8 -H 2>&1"
+    RAILS_DEFAULT_LOGGER.info("Running spell check: #{command}")
     output = IO.popen(command, 'r+') {|io| io.puts(text); io.close_write; io.read }
 
     # return an array of results
@@ -18,7 +22,6 @@ class FckeditorSpellCheck
   end
 
  private
-
   # return a 2-D array of results, where each element in the array has a pair
   # of values: [ escaped word, comma separted list of escaped suggestions ]
   def self.parse_aspell_line(line)

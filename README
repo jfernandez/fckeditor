@@ -1,4 +1,4 @@
-Fckeditor: Version 0.4.1
+Fckeditor: Version 0.4.2
 =========================
 
 Scott Rutherford
@@ -14,6 +14,10 @@ And for the spell checker, which Ken Pratt created a patch for:
 
 Ken Pratt: www.kenpratt.net
 http://softiesonrails.com/articles/2006/02/14/fckeditor-with-spell-check-on-rails
+
+Hongli Lai: For numerous patches and some nice tiding and the upgrade to 2.4.3
+
+David Jones: http://resolvedigital.com/ and http://www.d-jones.com for the update_fckeditor rake task
 
 Nicola Piccinini: http://superfluo.org for various bits and pieces
 
@@ -59,7 +63,6 @@ FCKRelativePath = '/app';
 
 Usage
 -----
-
 
 Basically include this in the page you wish to use the editor in
 

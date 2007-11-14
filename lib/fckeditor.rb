@@ -5,11 +5,19 @@ module Fckeditor
   PLUGIN_PUBLIC_PATH = "#{PLUGIN_PATH}/public"
   PLUGIN_CONTROLLER_PATH = "#{PLUGIN_PATH}/app/controllers"  
   PLUGIN_VIEWS_PATH = "#{PLUGIN_PATH}/app/views"  
+  PLUGIN_HELPER_PATH = "#{PLUGIN_PATH}/app/helpers"
       
   module Helper
     def fckeditor_textarea(object, field, options = {})
-      value = eval("@#{object}.#{field}")
-      value = value.nil? ? "" : value
+      var = instance_variable_get("@#{object}")
+      if var
+        value = var.send(field.to_sym)
+        value = value.nil? ? "" : value
+      else
+        value = ""
+        klass = "#{object}".capitalize.constantize
+        instance_variable_set("@#{object}", eval("#{klass}.new()"))
+      end
       id = fckeditor_element_id(object, field)
       
       cols = options[:cols].nil? ? '' : "cols='"+options[:cols]+"'"
@@ -21,18 +29,19 @@ module Fckeditor
       toolbarSet = options[:toolbarSet].nil? ? 'Default' : options[:toolbarSet]
       
       if options[:ajax]
-        inputs = "<input type='hidden' id='#{id}_hidden' name='#{object}[#{field}]'>\n"+    
+        inputs = "<input type='hidden' id='#{id}_hidden' name='#{object}[#{field}]'>\n" <<
                  "<textarea id='#{id}' #{cols} #{rows} name='#{id}'>#{value}</textarea>\n"
       else 
         inputs = "<textarea id='#{id}' #{cols} #{rows} name='#{object}[#{field}]'>#{value}</textarea>\n"
       end
-
-      base_path = @request.relative_url_root.to_s+'/javascripts/fckeditor/'
-      inputs + 
-      javascript_tag( "var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n"+
-                      "oFCKeditor.BasePath = \"#{base_path}\"\n"+
-                      "oFCKeditor.Config['CustomConfigurationsPath'] = '../../fckcustom.js';\n"+
-                      "oFCKeditor.ReplaceTextarea();\n")                         
+      
+      js_path = "#{request.relative_url_root}/javascripts"
+      base_path = "#{js_path}/fckeditor/"
+      return inputs <<
+        javascript_tag("var oFCKeditor = new FCKeditor('#{id}', '#{width}', '#{height}', '#{toolbarSet}');\n" <<
+                       "oFCKeditor.BasePath = \"#{base_path}\"\n" <<
+                       "oFCKeditor.Config['CustomConfigurationsPath'] = '#{js_path}/fckcustom.js';\n" <<
+                       "oFCKeditor.ReplaceTextarea();\n")
     end
     
     def fckeditor_form_remote_tag(options = {})

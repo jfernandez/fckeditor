@@ -101,7 +101,12 @@ class FckeditorController < ActionController::Base
       @errorNumber = 110 if @errorNumber.nil?
     end
 
-    render :text => %Q'<script>window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber});</script>'
+    render :text => %Q'
+    <script>
+      if (window.parent.frames[\'frmUpload\']) {
+        window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber});
+      }
+    </script>'
   end
 
   def upload
@@ -128,13 +133,14 @@ class FckeditorController < ActionController::Base
   end
   
   def upload_directory_path
-    uploaded = @request.relative_url_root.to_s+"#{UPLOADED}/#{params[:Type]}"
+    uploaded = request.relative_url_root.to_s+"#{UPLOADED}/#{params[:Type]}"
     "#{uploaded}#{params[:CurrentFolder]}"
   end
   
   def check_file(file)
     # check that the file is a tempfile object
-    unless "#{file.class}" == "Tempfile"
+    # RAILS_DEFAULT_LOGGER.info "CLASS OF UPLOAD OBJECT: #{file.class}"
+    unless "#{file.class}" == "Tempfile" || "StringIO"
       @errorNumber = 403
       throw Exception.new
     end
