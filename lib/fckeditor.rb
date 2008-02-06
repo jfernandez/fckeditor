@@ -15,7 +15,7 @@ module Fckeditor
         value = value.nil? ? "" : value
       else
         value = ""
-        klass = "#{object}".capitalize.constantize
+        klass = "#{object}".camelcase.constantize
         instance_variable_set("@#{object}", eval("#{klass}.new()"))
       end
       id = fckeditor_element_id(object, field)
@@ -76,7 +76,7 @@ module Fckeditor
 
     def fckeditor_before_js(object, field)
       id = fckeditor_element_id(object, field)
-      "var oEditor = FCKeditorAPI.GetInstance('"+id+"'); $('"+id+"_hidden').value = oEditor.GetXHTML();"
+      "var oEditor = FCKeditorAPI.GetInstance('"+id+"'); document.getElementById('"+id+"_hidden').value = oEditor.GetXHTML();"
     end    
   end
 end
