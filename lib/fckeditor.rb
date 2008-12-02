@@ -18,8 +18,8 @@ module Fckeditor
         klass = "#{object}".camelcase.constantize
         instance_variable_set("@#{object}", eval("#{klass}.new()"))
       end
-      id = fckeditor_element_id(object, field)
       
+      id   = options[:id].nil? ? fckeditor_element_id(object, field) : options[:id]
       cols = options[:cols].nil? ? '' : "cols='"+options[:cols]+"'"
       rows = options[:rows].nil? ? '' : "rows='"+options[:rows]+"'"
       
